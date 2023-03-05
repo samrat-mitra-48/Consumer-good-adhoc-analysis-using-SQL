@@ -77,18 +77,6 @@ from x where max=1 or min=1;
 
 
 
-WITH x AS (
-    SELECT p.product_code, p.segment, p.product, mc.manufacturing_cost,
-        DENSE_RANK() OVER (ORDER BY mc.manufacturing_cost DESC) AS max,
-        DENSE_RANK() OVER (ORDER BY mc.manufacturing_cost) AS min
-    FROM fact_manufacturing_cost mc
-    JOIN dim_product p ON p.product_code = mc.product_code
-)
-SELECT product_code, segment, product, manufacturing_cost
-FROM x
-WHERE max = 1 OR min = 1
-group by product;
-
 
 # 6. Top 5 customers who received 
 # an average high pre_invoice_discount_pct for the fiscal year 2021 and in the Indian market.
@@ -154,10 +142,6 @@ from cte;
  
  
 # 10. Get the Top 3 products in each division that have a high total_sold_quantity in the fiscal_year 2021?
-
-
-
-
 
 with cte as (
   select 
