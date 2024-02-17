@@ -6,9 +6,9 @@ where customer='Atliq Exclusive'
 and region='APAC';
 
 Output:
-+-------------+
+
 | market      |
-+-------------+
+|-------------|
 | Australia   |
 | Bangladesh  |
 | India       |
@@ -17,7 +17,7 @@ Output:
 | Newzealand  |
 | Philippines |
 | South Korea |
-+-------------+
+
 # 2. What is the percentage of unique product increase in 2021 vs. 2020
 
 with count_product as
@@ -31,11 +31,11 @@ round((unique_product_code2021-unique_product_code2020)/unique_product_code2020*
 from count_product;
 
 Output:
-+-------------------------+-------------------------+--------------+
+
 | unique_product_code2020 | unique_product_code2021 | prcnt_change |
-+-------------------------+-------------------------+--------------+
+|-------------------------|-------------------------|--------------|
 | 245                     | 334                     | 36.33        |
-+-------------------------+-------------------------+--------------+
+
 
 
 
@@ -46,16 +46,15 @@ group by segment
 order by unique_product_counts desc;
 
 Output:
-+-------------+-----------------------+
-| segment     | unique_product_counts |
-+-------------+-----------------------+
-| Notebook    | 129                   |
-| Accessories | 116                   |
-| Peripherals | 84                    |
-| Desktop     | 32                    |
-| Storage     | 27                    |
-| Networking  | 9                     |
-+-------------+-----------------------+
+
+| segment      | unique_product_counts |
+|--------------|-----------------------|
+| Notebook     | 129                   |
+| Accessories  | 116                   |
+| Peripherals  | 84                    |
+| Desktop      | 32                    |
+| Storage      | 27                    |
+| Networking   | 9                     |
 
 
 
@@ -76,17 +75,16 @@ segment,
  order by difference desc;
 
  Output:
-+-------------+------------------+------------------+------------+
-| segment     | product_count_20 | product_count_21 | difference |
-+-------------+------------------+------------------+------------+
-| Accessories | 69               | 103              | 34         |
-| Notebook    | 92               | 108              | 16         |
-| Peripherals | 59               | 75               | 16         |
-| Desktop     | 7                | 22               | 15         |
-| Storage     | 12               | 17               | 5          |
-| Networking  | 6                | 9                | 3          |
-|             |                  |                  |            |
-+-------------+------------------+------------------+------------+
+ 
+| segment      | product_count_20 | product_count_21 | difference |
+|--------------|------------------|------------------|------------|
+| Accessories  | 69               | 103              | 34         |
+| Notebook     | 92               | 108              | 16         |
+| Peripherals  | 59               | 75               | 16         |
+| Desktop      | 7                | 22               | 15         |
+| Storage      | 12               | 17               | 5          |
+| Networking   | 6                | 9                | 3          |
+
  
  
  # 5. Get the products that have the highest and lowest manufacturing costs
@@ -103,18 +101,16 @@ select product_code, product,manufacturing_cost
 from x where max=1 or min=1;
 
 Output:
-+--------------+-----------------------+--------------------+
+
 | product_code | product               | manufacturing_cost |
-+--------------+-----------------------+--------------------+
+|--------------|-----------------------|--------------------|
 | A2118150101  | AQ Master wired x1 Ms | 0.892              |
 | A6119110201  | AQ HOME Allin1 Gen 2  | 237.318            |
-+--------------+-----------------------+--------------------+
 
 
 
 
-# 6. Top 5 customers who received 
-# an average high pre_invoice_discount_pct for the fiscal year 2021 and in the Indian market.
+# 6. Top 5 customers who received an average high pre_invoice_discount_pct for the fiscal year 2021 and in the Indian market.
 
  
  select c.customer_code,c.customer, round(avg(i.pre_invoice_discount_pct)*100,2) average_discount_percentage from fact_pre_invoice_deductions i
@@ -127,15 +123,15 @@ Output:
  limit 5;
 
  Output:
-+---------------+----------+-----------------------------+
+ 
 | customer_code | customer | average_discount_percentage |
-+---------------+----------+-----------------------------+
+|---------------|----------|-----------------------------|
 | 90002009      | Flipkart | 30.83                       |
 | 90002006      | Viveks   | 30.38                       |
 | 90002003      | Ezone    | 30.28                       |
 | 90002002      | Croma    | 30.25                       |
 | 90002016      | Amazon   | 29.33                       |
-+---------------+----------+-----------------------------+
+
  
  # 7. Get the complete report of the Gross sales amount for the customer “Atliq Exclusive” for each month
   
@@ -151,9 +147,9 @@ where c.customer='Atliq Exclusive'
 group by month;
 
  Output:
-+-----------+-------------+--------------------+
+ 
 | month     | fiscal_year | Gross_sales_amount |
-+-----------+-------------+--------------------+
+|-----------|-------------|--------------------|
 | September | 2020        | 28622941.64        |
 | October   | 2020        | 31394855.81        |
 | November  | 2020        | 47479184.76        |
@@ -166,7 +162,7 @@ group by month;
 | June      | 2020        | 18887316.23        |
 | July      | 2020        | 24196784.22        |
 | August    | 2020        | 16962830.17        |
-+-----------+-------------+--------------------+
+
 
  
 # 8. In which quarter of 2020, got the maximum total_sold_quantity?
@@ -182,14 +178,14 @@ select
  group by quarter;
 
 Output:
-+---------+-----------------------------+
+
 | quarter | maximum_total_sold_quantity |
-+---------+-----------------------------+
+|---------|-----------------------------|
 | q1      | 7005619                     |
 | q2      | 6649642                     |
 | q3      | 2075087                     |
 | q4      | 5042541                     |
-+---------+-----------------------------+
+
 
 
 # 9. Which channel helped to bring more gross sales in the fiscal year 2021 and the percentage of contribution?
@@ -212,13 +208,13 @@ select channel,round(total_sales,2) as gross_sales,
 from cte;
 
 Output:
-+-------------+-------------+----------------------------+
-| channel     | gross_sales | percentage_of_contribution |
-+-------------+-------------+----------------------------+
-| Direct      | 257532002.7 | 15.47073932                |
-| Retailer    | 1219081640  | 73.23398284                |
-| Distributor | 188025630.9 | 11.29527784                |
-+-------------+-------------+----------------------------+
+
+| channel     | gross_sales  | percentage_of_contribution |
+|-------------|--------------|-----------------------------|
+| Direct      | 257532002.7  | 15.47073932                 |
+| Retailer    | 1219081640   | 73.23398284                 |
+| Distributor | 188025630.9  | 11.29527784                 |
+
  
  
 # 10. Get the Top 3 products in each division that have a high total_sold_quantity in the fiscal_year 2021?
