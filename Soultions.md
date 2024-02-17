@@ -22,7 +22,7 @@ Output:
 | South Korea |
 
 # 2. What is the percentage of unique product increase in 2021 vs. 2020
-
+```sql
 with count_product as
 (select 
 count(distinct case when fiscal_year=2021 then product_code END ) unique_product_code2021,
