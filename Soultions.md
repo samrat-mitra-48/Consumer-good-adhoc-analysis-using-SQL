@@ -1,7 +1,7 @@
-
+```sql
 # 1. Provide the list of markets in which customer "Atliq Exclusive" operates its business in the APAC region.
 
-```sql
+
 select distinct(market) 
 from dim_customer 
 where customer='Atliq Exclusive' 
@@ -22,7 +22,7 @@ Output:
 | South Korea |
 
 # 2. What is the percentage of unique product increase in 2021 vs. 2020
-```sql
+
 with count_product as
 (select 
 count(distinct case when fiscal_year=2021 then product_code END ) unique_product_code2021,
